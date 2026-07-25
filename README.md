@@ -207,9 +207,9 @@ Hyperparameter tuning was performed using **RandomizedSearchCV** to optimize the
 | Model | MAE | RMSE | R² |
 |------|------:|------:|------:|
 | Linear Regression | 858.50 | 1214.24 | 0.8511 |
-| Decision Tree | 775.23 | 33.35 | 0.8751 |
-| Random Forest | 712.19 | 31.90 | 0.8954 |
-| **XGBoost** | **629.67** | **29.71** | **0.9213** |
+| Decision Tree | 775.23 | 1112.03 | 0.8751 |
+| Random Forest | 712.19 | 1017.9 | 0.8954 |
+| **XGBoost** | **629.67** | **882.91** | **0.9213** |
 
 **Final Selected Model:** XGBoost Regressor
 
