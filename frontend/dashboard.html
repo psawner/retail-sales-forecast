@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Retail Dashboard</title>
+
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">
+            <i class="fa-solid fa-shop"></i>
+            RetailForecast
+        </div>
+
+        <nav>
+            <a href="#">Home</a>
+            <a href="#features">Features</a>
+            <a href="forecast.html" class="btn-nav">Predict</a>
+        </nav>
+
+    </header>
+
+
+    <div class="main">
+
+        <div class="cards">
+
+            <div class="card">
+
+                <h3>Today's Forecast</h3>
+
+                <h2 id="forecastValue"></h2>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Demand</h3>
+
+                <h2 id="demandValue"></h2>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Forecast Accuracy</h3>
+
+                <h2>92%</h2>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Inventory</h3>
+
+                <h2 id="inventoryStatus">
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="chart-grid">
+
+            <div class="chart-card">
+
+                <h3>Monthly Sales Trend</h3>
+
+                <canvas id="salesChart"></canvas>
+
+            </div>
+
+            <div class="chart-card">
+
+                <h3>Sales by Store Type</h3>
+
+                <canvas id="storeChart"></canvas>
+
+            </div>
+
+            <div class="chart-card">
+
+                <h3>Actual vs Predicted</h3>
+
+                <canvas id="predictionChart"></canvas>
+
+            </div>
+
+            <div class="chart-card">
+
+                <h3>Promotion Impact</h3>
+
+                <canvas id="promoChart"></canvas>
+
+            </div>
+
+        </div>
+
+
+        <div class="bottom-grid">
+
+            <div class="recommendation">
+
+                <h2>
+
+                    Business Recommendation
+
+                </h2>
+
+                <ul id="recommendationList">
+
+                    <li>Increase inventory.</li>
+
+                    <li>Add more staff.</li>
+
+                    <li>Promotion performing well.</li>
+
+                </ul>
+
+            </div>
+
+            <div class="recommendation">
+
+                <h2>
+
+                    Feature Importance
+
+                </h2>
+
+                <img src="images/shap_summary.png" class="shap">
+
+            </div>
+
+        </div>
+
+        <div class="download">
+
+            <button id="downloadBtn">
+
+                Download Report
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

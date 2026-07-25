@@ -1,1 +1,10 @@
-data/processed/
+.venv/
+.env
+__pycache__/
+*.py[cod]
+*.log
+*.sqlite3
+.DS_Store
+.vscode/
+.idea/
+data/

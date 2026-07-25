@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retail Sales Forecasting</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">
+            <i class="fa-solid fa-shop"></i>
+            RetailForecast
+        </div>
+
+        <nav>
+            <a href="#">Home</a>
+            <a href="#features">Features</a>
+            <a href="#" id="infoToggle"><i class="fa-solid fa-info"></i></a>
+            <a href="forecast.html" class="btn-nav">Predict</a>
+        </nav>
+
+    </header>
+
+    <section class="hero">
+
+        <div class="hero-left">
+
+            <h1>
+                AI Powered <span>Retail Sales Forecasting</span>
+            </h1>
+
+            <p>
+
+                Forecast future store sales using Machine Learning,
+                receive intelligent inventory recommendations,
+                analyze demand trends and optimize retail operations.
+
+            </p>
+
+            <div class="buttons">
+
+                <a href="forecast.html" class="primary-btn">
+                    Start Forecasting
+                </a>
+
+                <a href="#features" class="secondary-btn">
+                    Learn More
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="hero-right">
+
+            <div class="card">
+
+                <h2>Today's Forecast</h2>
+
+                <h1 id="forecast"></h1>
+
+                <p id="demand"></p>
+
+                <div class="badge" id="change"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="stats">
+
+        <div class="stat-card">
+            <h2 class="counter" data-target="844000">
+                0
+            </h2>
+            <p>Sales Records</p>
+        </div>
+
+        <div class="stat-card">
+            <h2 class="counter" data-target="1115">0</h2>
+            <p>Retail Stores</p>
+        </div>
+
+        <div class="stat-card">
+            <h2 class="counter" data-target="92">0</h2>
+            <p>Prediction Accuracy</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>XGBoost</h2>
+            <p>Forecast Model</p>
+        </div>
+
+    </section>
+
+
+    <section id="features">
+
+        <h2>Key Features</h2>
+
+        <div class="feature-grid">
+
+            <div class="feature">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <h3>Sales Forecasting</h3>
+
+                <p>Predict future sales using XGBoost.</p>
+
+            </div>
+
+            <div class="feature">
+
+                <i class="fa-solid fa-boxes-stacked"></i>
+
+                <h3>Inventory Planning</h3>
+
+                <p>
+                    Receive inventory recommendations
+                    based on forecasted demand.
+                </p>
+
+            </div>
+
+            <div class="feature">
+
+                <i class="fa-solid fa-percent"></i>
+
+                <h3>Promotion Analysis</h3>
+
+                <p>
+                    Evaluate promotion effectiveness
+                    and identify demand drivers.
+                </p>
+
+            </div>
+
+            <div class="feature">
+
+                <i class="fa-solid fa-chart-bar"></i>
+
+                <h3>Business Dashboard</h3>
+
+                <p>
+                    Interactive analytics for store performance,
+                    KPIs and business insights.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section id="workflow">
+
+        <h2>How It Works</h2>
+
+        <div class="flow">
+
+            <div class="step">
+
+                <i class="fa-solid fa-store"></i>
+
+                <h3>User Input</h3>
+
+            </div>
+
+            <div class="arrow">➜</div>
+
+            <div class="step">
+
+                <i class="fa-solid fa-gears"></i>
+
+                <h3>Feature Engineering</h3>
+
+            </div>
+
+            <div class="arrow">➜</div>
+
+            <div class="step">
+
+                <i class="fa-solid fa-brain"></i>
+
+                <h3>XGBoost Model</h3>
+
+            </div>
+
+            <div class="arrow">➜</div>
+
+            <div class="step">
+
+                <i class="fa-solid fa-lightbulb"></i>
+
+                <h3>Business Insights</h3>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section id="tech" class="hidden">
+
+        <div class="tech-card">
+
+            <button class="tech-close" id="closeTech" aria-label="Close tech card">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h2>Technology Stack</h2>
+
+            <div class="tech-stack">
+
+            <span>Python</span>
+
+            <span>FastAPI</span>
+
+            <span>XGBoost</span>
+
+            <span>Pandas</span>
+
+            <span>Power BI</span>
+
+            <span>HTML</span>
+
+            <span>CSS</span>
+
+            <span>JavaScript</span>
+
+        </div>
+
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <h3 style="margin:0;font-size:1.1rem;letter-spacing:0.02em;">Retail Sales Forecasting</h3>
+            <p style="margin:8px 0 0;font-size:0.95rem;color:#cbd5e1;">Built with FastAPI • XGBoost • Power BI</p>
+            <p style="margin:6px 0 0;font-size:0.85rem;color:#94a3b8;">© 2026</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
