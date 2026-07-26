@@ -1,6 +1,7 @@
 import pandas as pd
+from backend.data_loader import load_csv
 
-sales_history = pd.read_csv(r"data/processed/feature_engineered_data.csv")
+sales_history = load_csv("data/processed/feature_engineered_data.csv")
 
 def lag_features(data):
     sales_history["Date"] = pd.to_datetime(sales_history["Date"])

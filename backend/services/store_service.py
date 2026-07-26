@@ -1,6 +1,8 @@
 import pandas as pd
+from backend.data_loader import load_csv
 
-store_df = pd.read_csv(r"data/processed/clean_sales.csv")
+
+store_df = load_csv("data/processed/clean_sales.csv")
 
 def store_metadata(data):
     store_df["PromoInterval"] = store_df["PromoInterval"].fillna("")

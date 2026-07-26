@@ -1,5 +1,8 @@
 import pandas as pd
-predict_actual  = pd.read_csv(r"reports/actual_predictions.csv")
+from backend.data_loader import load_csv
+
+
+predict_actual  = load_csv("reports/actual_predictions.csv")
 
 def get_prediction_data():
     return predict_actual

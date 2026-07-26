@@ -139,7 +139,7 @@ def generate_report(data):
 
         ["MAE","629.67"],
 
-        ["RMSE","29.71"]
+        ["RMSE","882.91"]
 
     ]
 
