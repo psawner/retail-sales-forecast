@@ -31,7 +31,7 @@ async function initDashboard() {
 
 
     const response = await fetch(
-        `http://127.0.0.1:8000/history/${prediction.store}`
+        `${API}/history/${prediction.store}`
     );
 
     const history = await response.json();
@@ -74,7 +74,7 @@ async function initDashboard() {
     // ----------------------
 
     const store_response =
-        await fetch("http://127.0.0.1:8000/store-types");
+        await fetch(`${API}/store-types`);
 
     const data = await store_response.json();
 
@@ -107,7 +107,7 @@ async function initDashboard() {
     // ----------------------
 
     const predict_response = await fetch(
-        `http://127.0.0.1:8000/forecast/${prediction.store}`
+        `${API}/forecast/${prediction.store}`
     );
 
     const predict_data = await predict_response.json();
@@ -139,7 +139,7 @@ async function initDashboard() {
     // ----------------------
 
     const promo_response = await fetch(
-        "http://127.0.0.1:8000/promotion-impact"
+        `${API}/promotion-impact`
     );
 
     const promo_data = await promo_response.json();
@@ -174,7 +174,7 @@ async function initDashboard() {
                 JSON.parse(localStorage.getItem("prediction"));
 
             const response = await fetch(
-                "http://127.0.0.1:8000/report",
+                `${API}/report`,
                 {
                     method: "POST",
 

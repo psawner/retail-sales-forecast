@@ -70,7 +70,7 @@ counters.forEach(counter => observer.observe(counter));
 window.onload = async () => {
 
     const response = await fetch(
-        "http://127.0.0.1:8000/home"
+        `${API}/home`
     );
 
     const data = await response.json();

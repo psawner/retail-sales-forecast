@@ -23,7 +23,7 @@ form.addEventListener("submit", async (e) => {
 
     };
 
-    const response = await fetch("http://127.0.0.1:8000/predict", {
+    const response = await fetch(`${API}/predict`, {
 
         method: "POST",
 
