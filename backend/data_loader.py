@@ -2,7 +2,7 @@ import pandas as pd
 import boto3
 from backend.config import USE_S3
 
-BUCKET = "retail_forecast"
+BUCKET = "retail-forecast-data"
 
 def load_csv(file_name):
 
