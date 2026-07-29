@@ -4,7 +4,7 @@ pandas
 seaborn
 matplotlib
 scikit-learn
-xgboost
+xgboost==2.0.3
 fastapi
 uvicorn
 reportlab
