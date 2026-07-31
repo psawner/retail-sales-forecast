@@ -9,7 +9,12 @@ def store_metadata(data):
 
     store_info = store_df.loc[
         store_df["Store"] == data["Store"].iloc[0]
-    ].iloc[0]
+    ]
+
+    if store_info.empty:
+        raise ValueError(f"Store {data['Store'].iloc[0]} not found")
+
+    store_info = store_info.iloc[0]
 
     promo_interval_map = {
             "": 0,
@@ -44,19 +49,26 @@ def store_metadata(data):
     
     data["CompetitionOpenSinceYear"] = store_info["CompetitionOpenSinceYear"]
     
-    comp_start = pd.Timestamp(
-        year=int(store_info["CompetitionOpenSinceYear"]),
-        month=int(store_info["CompetitionOpenSinceMonth"]),
-        day=1
-    )
-    
-    current = data["date"].iloc[0]
-    
-    data["CompetitionAgeMonths"] = max(
-        0,
-        (current.year - comp_start.year) * 12 +
-        (current.month - comp_start.month)
-    )
+    year = store_info["CompetitionOpenSinceYear"]
+    month = store_info["CompetitionOpenSinceMonth"]
+
+    if year and month and year > 0 and month > 0:
+        comp_start = pd.Timestamp(
+            year=int(year),
+            month=int(month),
+            day=1
+        )
+
+        current = data["date"].iloc[0]
+
+        data["CompetitionAgeMonths"] = max(
+                0,
+                (current.year - comp_start.year) * 12 +
+                (current.month - comp_start.month)
+        )
+    else:
+        data["CompetitionAgeMonths"] = 0
+        
 
     if store_info["Promo2"] == 1:
 

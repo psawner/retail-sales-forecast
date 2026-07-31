@@ -4,9 +4,7 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Retail Dashboard</title>
 
     <link rel="stylesheet" href="css/dashboard.css">
@@ -26,7 +24,7 @@
 
         <nav>
             <a href="#">Home</a>
-            <a href="#features">Features</a>
+            <a href="#download">Report</a>
             <a href="forecast.html" class="btn-nav">Predict</a>
         </nav>
 
@@ -38,36 +36,23 @@
         <div class="cards">
 
             <div class="card">
-
                 <h3>Today's Forecast</h3>
-
-                <h2 id="forecastValue"></h2>
-
+                <h2 id="forecastValue">$48,210</h2>
             </div>
 
             <div class="card">
-
                 <h3>Demand</h3>
-
-                <h2 id="demandValue"></h2>
-
+                <h2 id="demandValue">6,340 units</h2>
             </div>
 
             <div class="card">
-
                 <h3>Forecast Accuracy</h3>
-
                 <h2>92%</h2>
-
             </div>
 
             <div class="card">
-
                 <h3>Inventory</h3>
-
-                <h2 id="inventoryStatus">
-                </h2>
-
+                <h2 id="inventoryStatus">Healthy</h2>
             </div>
 
         </div>
@@ -76,35 +61,23 @@
         <div class="chart-grid">
 
             <div class="chart-card">
-
                 <h3>Monthly Sales Trend</h3>
-
                 <canvas id="salesChart"></canvas>
-
             </div>
 
             <div class="chart-card">
-
                 <h3>Sales by Store Type</h3>
-
                 <canvas id="storeChart"></canvas>
-
             </div>
 
             <div class="chart-card">
-
                 <h3>Actual vs Predicted</h3>
-
                 <canvas id="predictionChart"></canvas>
-
             </div>
 
             <div class="chart-card">
-
                 <h3>Promotion Impact</h3>
-
                 <canvas id="promoChart"></canvas>
-
             </div>
 
         </div>
@@ -113,50 +86,27 @@
         <div class="bottom-grid">
 
             <div class="recommendation">
-
-                <h2>
-
-                    Business Recommendation
-
-                </h2>
-
+                <h2>Business Recommendation</h2>
                 <ul id="recommendationList">
-
-                    <li>Increase inventory.</li>
-
-                    <li>Add more staff.</li>
-
-                    <li>Promotion performing well.</li>
-
+                    <li></li>
+                    <li></li>
+                    <li></li>
                 </ul>
-
             </div>
 
             <div class="recommendation">
-
-                <h2>
-
-                    Feature Importance
-
-                </h2>
-
-                <img src="images/shap_summary.png" class="shap">
-
+                <h2>Feature Importance</h2>
+                <img src="../assets/shap_summary_plot.png" class="shap" alt="Top 8 SHAP Feature Importance">
             </div>
 
         </div>
 
-        <div class="download">
-
-            <button id="downloadBtn">
-
-                Download Report
-
-            </button>
-
+        <div class="download" id="download">
+            <button id="downloadBtn"><i class="fa-solid fa-download"></i> Download Report</button>
         </div>
 
     </div>
+
     <script src="js/config.js"></script>
     <script src="js/dashboard.js"></script>
 

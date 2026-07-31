@@ -1,3 +1,56 @@
+
+const theme = {
+    navy: "#131b3a",
+    navySoft: "#232b4d",
+    amber: "#ff7a29",
+    amberSoft: "rgba(255, 122, 41, 0.15)",
+    navyFill: "rgba(19, 27, 58, 0.06)",
+    line: "#e3e6f0",
+    muted: "#6b7590",
+    grey: "#c9cfe0"
+};
+
+Chart.defaults.font.family = "'Inter', sans-serif";
+Chart.defaults.color = theme.muted;
+Chart.defaults.plugins.legend.labels.usePointStyle = true;
+Chart.defaults.plugins.legend.labels.boxWidth = 8;
+
+const baseScales = {
+    x: {
+        grid: { color: theme.line, drawTicks: false },
+        border: { display: false }
+    },
+    y: {
+        grid: { color: theme.line, drawTicks: false },
+        border: { display: false }
+    }
+};
+
+const lineChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    layout: {
+        padding: {
+            bottom: 10
+        }
+    },
+    plugins: {
+        legend: { display: false }
+    },
+    scales: {
+        ...baseScales,
+        x: {
+            ...baseScales.x,
+            ticks: {
+                autoSkip: true,
+                maxTicksLimit: 8,
+                maxRotation: 45,
+                minRotation: 45
+            }
+        }
+    }
+};
+
 async function initDashboard() {
     const prediction = JSON.parse(localStorage.getItem("prediction")) || {};
 
@@ -60,11 +113,22 @@ async function initDashboard() {
 
                     label: "Sales",
 
-                    data: sales
+                    data: sales,
+
+                    borderColor: theme.navy,
+                    backgroundColor: theme.navyFill,
+                    pointBackgroundColor: theme.amber,
+                    pointBorderColor: theme.amber,
+                    pointRadius: 3,
+                    pointHoverRadius: 5,
+                    tension: 0.35,
+                    fill: true,
+                    borderWidth: 2
 
                 }]
 
-            }
+            },
+            options: lineChartOptions
 
         });
 
@@ -95,16 +159,25 @@ async function initDashboard() {
                 datasets: [{
                     label: "Average Sales",
 
-                    data: store_sales
+                    data: store_sales,
+
+                    backgroundColor: theme.navy,
+                    hoverBackgroundColor: theme.amber,
+                    borderRadius: 6,
+                    maxBarThickness: 42
                 }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    ...baseScales,
+                    x: { ...baseScales.x, grid: { display: false } }
+                }
             }
         }
     );
-
-
-    // ----------------------
-    // Actual vs Predicted
-    // ----------------------
 
     const predict_response = await fetch(
         `${API}/forecast/${prediction.store}`
@@ -123,20 +196,32 @@ async function initDashboard() {
             datasets: [
                 {
                     label: "Actual",
-                    data: predict_actual
+                    data: predict_actual,
+                    borderColor: theme.navy,
+                    backgroundColor: theme.navy,
+                    pointRadius: 2,
+                    tension: 0.3,
+                    borderWidth: 2
                 },
                 {
                     label: "Predicted",
-                    data: predict_predicted
+                    data: predict_predicted,
+                    borderColor: theme.amber,
+                    backgroundColor: theme.amber,
+                    borderDash: [6, 4],
+                    pointRadius: 2,
+                    tension: 0.3,
+                    borderWidth: 2
                 }
             ]
+        },
+        options: {
+            ...lineChartOptions,
+            plugins: { legend: { display: true, position: "bottom" } }
         }
+
     });
 
-
-    // ----------------------
-    // Promotion Impact
-    // ----------------------
 
     const promo_response = await fetch(
         `${API}/promotion-impact`
@@ -155,16 +240,24 @@ async function initDashboard() {
                     data: [
                         promo_data.average_sales_no_promo,
                         promo_data.average_sales_promo
-                    ]
+                    ],
+                    backgroundColor: [theme.grey, theme.amber],
+                    borderRadius: 6,
+                    maxBarThickness: 60
                 }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: "y",
+                plugins: { legend: { display: false } },
+                scales: {
+                    ...baseScales,
+                    y: { ...baseScales.y, grid: { display: false } }
+                }
             }
         }
     );
-
-
-    // ----------------------
-    // Download Report
-    // ----------------------
 
     document
         .getElementById("downloadBtn")

@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from backend.model.schemas import SalesPredictForm
 from backend.model.ml_model import model, feature_columns
 
@@ -9,37 +9,41 @@ import pandas as pd
 
 router = APIRouter()
 
-
 @router.post("/predict")
 def predict(form: SalesPredictForm):
-    data = pd.DataFrame([{
-        "Store": form.store,
-        "date": form.date,
-        "promo": form.promo,
-        "state_holiday": form.state_holiday,
-        "school_holiday": form.school_holiday,
-        "open": form.is_open
-    }])
+    try:
+        data = pd.DataFrame([{
+            "Store": form.store,
+            "date": form.date,
+            "promo": form.promo,
+            "state_holiday": form.state_holiday,
+            "school_holiday": form.school_holiday,
+            "open": form.is_open
+        }])
 
-    data = create_features(data)
+        data = create_features(data)
 
-    data = data[feature_columns]
+        data = data[feature_columns]
 
-    # Predict
-    prediction = float(model.predict(data)[0])
+        prediction = float(model.predict(data)[0])
 
-    rolling_mean = float(data["RollingMean_30"].iloc[0])
+        rolling_mean = float(data["RollingMean_30"].iloc[0])
 
-    recommendations = get_business_recommendations(
-        predicted_sales=prediction,
-        rolling_mean_30=rolling_mean,
-        promo=form.promo
-    )
+        recommendations = get_business_recommendations(
+            predicted_sales=prediction,
+            rolling_mean_30=rolling_mean,
+            promo=form.promo
+        )
 
-    return {
-        "store": form.store,
-        "date": str(form.date),
-        "predicted_sales": round(float(prediction), 2),
-        **recommendations
-    }
+        return {
+            "store": form.store,
+            "date": str(form.date),
+            "predicted_sales": round(prediction, 2),
+            **recommendations
+        }
 
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail="An internal error occurred while generating the prediction."
+        )

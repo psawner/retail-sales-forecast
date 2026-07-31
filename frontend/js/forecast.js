@@ -1,8 +1,14 @@
 const form = document.getElementById("forecastForm");
+const resultEl = document.getElementById("result");
+const predictBtn = form.querySelector("button");
+const mid = document.querySelector(".mid");
 
 form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
+
+    predictBtn.disabled = true;
+    predictBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Predicting...`;
 
     const payload = {
 
@@ -23,52 +29,170 @@ form.addEventListener("submit", async (e) => {
 
     };
 
-    const response = await fetch(`${API}/predict`, {
+    try{
 
-        method: "POST",
+        const response = await fetch(`${API}/predict`,{
 
-        headers: {
+            method:"POST",
 
-            "Content-Type": "application/json"
+            headers:{
+                "Content-Type":"application/json"
+            },
 
-        },
+            body:JSON.stringify(payload)
 
-        body: JSON.stringify(payload)
-
-    });
-
-    const data = await response.json();
-
-    localStorage.setItem(
-        "prediction",
-        JSON.stringify(data)
-    );
-
-    const containerEl = document.querySelector(".container");
-    const resultEl = document.getElementById("result");
-
-    if (containerEl) containerEl.style.display = "block";
-    if (resultEl) {
-        resultEl.style.display = "block";
-        resultEl.style.opacity = "0";
-        resultEl.style.transform = "translateY(20px)";
-        resultEl.style.transition = "opacity 250ms ease-out, transform 250ms ease-out";
-        resultEl.innerHTML = `
-<div class="prediction-container">
-    <h2>Prediction</h2>
-    <p><b>Predicted Sales:</b> ₹${data.predicted_sales}</p>
-    <p><b>Demand Level:</b> ${data.demand_level}</p>
-    <p><b>Expected Change:</b> ${data.sales_change_percent}%</p>
-    <p><b>Inventory:</b> ${data.inventory_action}</p>
-    <p><b>Staffing:</b> ${data.staffing_action}</p>
-    <p><b>Promotion:</b> ${data.promotion_action}</p>
-</div>
-`;
-        requestAnimationFrame(() => {
-            resultEl.style.opacity = "1";
-            resultEl.style.transform = "translateY(0)";
         });
-        resultEl.scrollIntoView({ behavior: "smooth", block: "center" });
+
+        if(!response.ok){
+
+            throw new Error("Unable to generate prediction.");
+
+        }
+
+        const data = await response.json();
+
+        localStorage.setItem("prediction",JSON.stringify(data));
+
+        showPrediction(data);
+
+    }
+
+    catch(error){
+
+        resultEl.style.display="block";
+
+        mid.classList.add("show-result");
+
+        resultEl.innerHTML=`
+
+        <div class="prediction-container">
+
+            <h2>Prediction Failed</h2>
+
+            <div class="metric">
+
+                <span>Error</span>
+
+                <strong>${error.message}</strong>
+
+            </div>
+
+        </div>
+
+        `;
+
+    }
+
+    finally{
+
+        predictBtn.disabled=false;
+
+        predictBtn.innerHTML="Predict";
+
     }
 
 });
+
+
+function showPrediction(data){
+
+    mid.classList.add("show-result");
+
+    resultEl.style.display="block";
+
+    const sales = Number(data.predicted_sales).toLocaleString("en-IN",{
+
+        minimumFractionDigits:2,
+
+        maximumFractionDigits:2
+
+    });
+
+    const demandColor = getDemandColor(data.demand_level);
+
+    resultEl.innerHTML=`
+
+    <div class="prediction-container">
+
+        <h2>
+            <i class="fa-solid fa-chart-line"></i>
+            Forecast Result
+        </h2>
+
+        <div class="metric sales">
+
+            <span>Predicted Sales</span>
+
+            <strong>₹${sales}</strong>
+
+        </div>
+
+        <div class="metric demand">
+
+            <span>Demand Level</span>
+
+            <strong style="color:${demandColor}">
+                ${data.demand_level}
+            </strong>
+
+        </div>
+
+        <div class="metric change">
+
+            <span>Expected Change</span>
+
+            <strong>${data.sales_change_percent}%</strong>
+
+        </div>
+
+        <div class="metric inventory">
+
+            <span>Inventory</span>
+
+            <strong>${data.inventory_action}</strong>
+
+        </div>
+
+        <div class="metric staff">
+
+            <span>Staffing</span>
+
+            <strong>${data.staffing_action}</strong>
+
+        </div>
+
+        <div class="metric promotion">
+
+            <span>Promotion</span>
+
+            <strong>${data.promotion_action}</strong>
+
+        </div>
+
+    </div>
+
+    `;
+
+}
+
+
+
+function getDemandColor(level){
+
+    switch(level.toLowerCase()){
+
+        case "high":
+            return "#16a34a";
+
+        case "medium":
+            return "#f59e0b";
+
+        case "low":
+            return "#dc2626";
+
+        default:
+            return "#2563eb";
+
+    }
+
+}
