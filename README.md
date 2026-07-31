@@ -14,6 +14,21 @@ The solution combines data analytics, feature engineering, machine learning, mod
 
 ---
 
+## Project Highlights
+
+- End-to-end Retail Sales Forecasting System
+- Machine Learning-based demand prediction using XGBoost
+- FastAPI REST API for real-time predictions
+- Interactive frontend dashboard built with HTML, CSS, and JavaScript
+- Automated PDF business report generation
+- Historical sales visualization with Chart.js
+- Business recommendation engine
+- Explainable AI using SHAP
+- Power BI dashboard for executive analytics
+- Deployed on AWS EC2
+
+---
+
 ## Business Objectives
 
 - Forecast future daily sales for each store
@@ -66,61 +81,117 @@ Power BI Dashboard
 
 # Tech Stack
 
-### Programming
+## Programming Languages
 
 - Python
+- JavaScript
+- HTML5
+- CSS3
 
-### Libraries
+## Backend
 
-- Pandas
-- NumPy
-- Matplotlib
-- Seaborn
+- FastAPI
+- Uvicorn
+
+## Machine Learning
+
 - Scikit-learn
 - XGBoost
 - SHAP
-- Joblib
 
-### Visualization
+## Data Processing
 
+- Pandas
+- NumPy
+
+## Visualization
+
+- Matplotlib
+- Seaborn
+- Chart.js
 - Power BI
 
-### Development Tools
+## Report Generation
 
-- Jupyter Notebook
-- VS Code
+- ReportLab
+
+## Deployment
+
+- AWS EC2
+- Ubuntu Linux
 - Git
 - GitHub
 
+## Development Tools
+
+- VS Code
+- Jupyter Notebook
+
 ---
+
+# System Architecture
+```
+                Rossmann Dataset
+                       │
+                       ▼
+             Data Cleaning & EDA
+                       │
+                       ▼
+            Feature Engineering
+                       │
+                       ▼
+              XGBoost Model
+                       │
+                 model.pkl
+                       │
+                       ▼
+                FastAPI Backend
+      ┌───────────────┼────────────────┐
+      ▼               ▼                ▼
+ Prediction API   History API     Report API
+      │               │                │
+      └───────────────┼────────────────┘
+                      ▼
+         HTML/CSS/JavaScript Dashboard
+                      │
+                      ▼ 
+                Interactive Charts
+                      │
+                      ▼ 
+                  Business Insights
+
+```
 
 # Project Structure
 
 ```
-Retail-Demand-Forecasting/
-
+Retail-Demand-Forecasting
 │
-├── data/
-│   ├── raw/
-│   └── processed/
+├── backend/
+│   ├── routes/
+│   ├── services/
+│   ├── models/
+│   ├── schemas/
+│   ├── utils/
+│   ├── main.py
+│   └── data_loader.py
 │
-├── notebooks/
-│   ├── 01_Business_Understanding.ipynb
-│   ├── 02_Data_Loading.ipynb
-│   ├── 03_Data_Cleaning.ipynb
-│   ├── 04_EDA.ipynb
-│   ├── 05_Feature_Engineering.ipynb
-│   ├── 06_Model_Building.ipynb
-│   └── 07_Business_Insights.ipynb
-│
+├── frontend/
+│   ├── css/
+│   ├── js/
+│   ├── images/
+│   ├── index.html
+│   └── dashboard.html
 │
 ├── dashboard/
 │
+├── notebooks/
+│
 ├── reports/
 │
-├── models/
+├── assets/
 │
-├── images/
+├── data/
 │
 ├── requirements.txt
 │
@@ -285,14 +356,84 @@ Developed an interactive executive dashboard consisting of four pages:
 
 ---
 
+# REST API
+
+The project exposes REST APIs using FastAPI.
+
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| POST | /predict | Predict future sales |
+| GET | /history/{store} | Historical sales |
+| GET | /forecast/{store} | Actual vs Predicted Sales |
+| GET | /store-types | Store Type Analysis |
+| GET | /promotion-impact | Promotion Analysis |
+| GET | /report | Download PDF Report |
+
+Swagger Documentation
+
+http://localhost:8000/docs
+
+---
+
+# Frontend Dashboard
+
+A responsive dashboard was developed using HTML, CSS, and JavaScript.
+
+Features include:
+
+- Sales Forecast Card
+- Demand Level
+- Inventory Recommendation
+- Business Recommendations
+- Historical Sales Trend
+- Store Performance Chart
+- Actual vs Predicted Sales
+- Promotion Impact Analysis
+- Download PDF Report
+
+# Deployment
+
+The complete application was deployed on AWS EC2.
+
+Deployment Steps
+
+1. Launch Ubuntu EC2 Instance
+2. Configure Security Groups
+3. Clone GitHub Repository
+4. Create Python Virtual Environment
+5. Install Dependencies
+6. Start FastAPI using Uvicorn
+7. Host Frontend using Nginx
+8. Access application through Public IP
+
+Technology Used
+
+- AWS EC2
+- Ubuntu Linux
+- Uvicorn
+- Nginx
+
+# Challenges Faced
+
+During development and deployment, the following issues were encountered and resolved:
+
+- Missing values in date columns caused runtime errors (`year 0 is out of range`).
+- XGBoost compatibility issues with Python 3.14.
+- EC2 disk quota exceeded while installing dependencies.
+- API error handling for invalid requests.
+- Model serialization compatibility across XGBoost versions.
+
 # Future Improvements
 
-- Integrate weather and economic indicators
-- Include local event and festival data
-- Deploy the model using FastAPI
-- Automate daily retraining
-- Implement deep learning forecasting models (LSTM/Temporal Fusion Transformer)
-- Build a real-time forecasting dashboard
+- Dockerize the application
+- CI/CD using GitHub Actions
+- User authentication
+- Store prediction history in a database
+- Deploy behind Nginx with HTTPS
+- Daily automated model retraining
+- Weather and economic indicators
+- Deep Learning forecasting (LSTM, TFT)
+- Cloud storage for reports
 
 ---
 
