@@ -54,6 +54,20 @@ const lineChartOptions = {
 async function initDashboard() {
     const prediction = JSON.parse(localStorage.getItem("prediction")) || {};
 
+    const today = new Date().toISOString().split('T')[0];
+    const formattedDate = prediction.date === today ? "Today's Forecast" : 
+        new Date(prediction.date).toLocaleDateString('en-GB', { 
+            day: '2-digit', 
+            month: '2-digit', 
+            year: 'numeric' 
+        }).replace(/\//g, '-');
+
+    document.getElementById("forecast_time").innerHTML =
+        prediction.date ? formattedDate : "Today's Forecast";
+
+    document.getElementById("store_no").innerHTML =
+        prediction.store ? `Store No: ${prediction.store}` : "Store No: N/A";
+
     document.getElementById("forecastValue").innerHTML =
         prediction.predicted_sales ? `₹${prediction.predicted_sales}` : "₹0";
 
