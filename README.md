@@ -14,6 +14,12 @@ The solution combines data analytics, feature engineering, machine learning, mod
 
 ---
 
+## Project Demo
+
+Watch the complete demo here:
+
+https://youtu.be/BkL3imQoDdQ
+
 ## Project Highlights
 
 - End-to-end Retail Sales Forecasting System
